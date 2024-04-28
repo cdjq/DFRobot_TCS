@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*
+'''!
+  @file  DFRobot_TCS3400.py
+  @brief A library of color sensors
+  @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+  @license     The MIT License (MIT)
+  @author      TangJie(jie.tang@dfrobot.com)
+  @version     V1.0.0
+  @date        2024-04-24
+  @url         https://github.com/DFRobot/DFRobot_TCS
+
+'''
 
 from __future__ import print_function
 import sys
@@ -23,12 +34,25 @@ class DFRobot_TCS3400(DFRobot_TCS34):
         return super()
     
   def begin(self):
+    '''!
+      @fn begin
+      @brief Initialize the sensor
+      @return Initialization status
+    '''
     if(self.super_cls.begin(TCS3400)):
       return 0
     return -1 
   
 
   def get_rgbc(self):
+    '''!
+	    @fn get_rgbc
+	    @brief Reads the raw red, green, blue and clear channel values
+	    @param r  red.
+	    @param g  green.
+	    @param b  blue.
+	    @param c  color temperature
+    '''
     c = self.super_cls.read_reg_word(self.TCS34_CDATAL)
     r = self.super_cls.read_reg_word(self.TCS34_RDATAL)
     g = self.super_cls.read_reg_word(self.TCS34_GDATAL)

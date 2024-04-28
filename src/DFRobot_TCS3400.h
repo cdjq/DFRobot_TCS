@@ -33,11 +33,11 @@ public:
   DFRobot_TCS3400(TwoWire *pWire=&Wire, uint8_t I2C_addr = TCS3400_ADDR, eIntegrationTime_t it= TCS3400_INTEGRATIONTIME_2_78MS, eGain_t gain= TCS3400_GAIN_1X);
   
   /**
-   * @fn begin 
-   * @brief 初始化 tcs3400
-   * @return 返回初始化状态
-   * @retval RET_OK 成功
-   * @retval RET_ERROR 失败
+   * @fn begin
+   * @brief Initialize the sensor
+   * @return Initialization status
+   * @retval RET_OK Initialization successful
+   * @retval RET_ERROR Initialization failed
   */
   int8_t begin(void);
 

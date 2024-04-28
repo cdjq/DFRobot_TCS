@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*
+'''!
+    @file  DFRobot_TCS34.py
+    @brief A library of color sensors
+    @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+    @license     The MIT License (MIT)
+    @author      TangJie(jie.tang@dfrobot.com)
+    @version     V1.0.0
+    @date        2024-04-26
+    @url         https://github.com/DFRobot/DFRobot_TCS
+
+'''
 
 import smbus
 import time
@@ -61,6 +72,14 @@ class DFRobot_TCS34(object):
         self.tcs34_integration_time = int
   
     def begin(self,sensor):
+        '''!
+          @fn begin
+	        @brief Initializes I2C and configures the sensor (call this function beforedoing anything else).
+	        @param sensor Select sensor
+	        @return boolean
+	        @retval true success
+	        @retval false fail
+        '''
         buf = self._read_reg(self.TCS34_ID,1)
         if sensor == TCS3400:
             if(buf[0] != TCS34_001_005) and (buf[0] != 0x10):
@@ -74,6 +93,10 @@ class DFRobot_TCS34(object):
         return True
     
     def enable(self):
+        '''!
+          @fn enable
+	        @brief Enables the device
+        '''
         data = self.TCS34_ENABLE_PON
         self._write_reg(self.TCS34_ENABLE,data)
         data = self.TCS34_ENABLE_PON | self.TCS34_ENABLE_AEN
@@ -81,19 +104,41 @@ class DFRobot_TCS34(object):
         self._write_reg(self.TCS34_ENABLE,data)
     
     def disable(self):
+        '''!
+          @fn disable
+	        @brief disenables the device
+        '''
         reg = self._read_reg(self.TCS34_ENABLE,1)
         data = reg[0] & ~(self.TCS34_ENABLE_PON| self.TCS34_ENABLE_AEN)
         self._write_reg(self.TCS34_ENABLE,data)
 
     def set_integration_time(self,it):
+        '''!
+          @fn set_integration_time
+	        @brief Sets the integration time for the TC34725.
+	        @param it  integration time.
+        '''
         self.tcs34_integration_time = it
         self._write_reg(self.TCS34_ATIME,it)
     
     def set_gain(self,gain):
+        '''!
+          @fn set_gain
+	        @brief Adjusts the gain on the TCS34725 (adjusts the sensitivity to light)
+	        @param gain  gain time.
+        '''
         self.tcs34_gain = gain
         self._write_reg(self.TCS34_CONTROL,gain)
 
     def calculate_colortemperature(self,r,g,b):
+        '''!
+          @fn calculate_colortemperature
+	        @brief Converts the raw R/G/B values to color temperature in degrees
+	        @param r  red.
+	        @param g  green.
+	        @param b  blue.
+	        @return uint16_t color temperature
+        '''
         X = (-0.14282 * r) + (1.54924 * g) + (-0.95641 * b)
         Y = (-0.32466 * r) + (1.57837 * g) + (-0.73191 * b)
         Z = (-0.68202 * r) + (0.77073 * g) + ( 0.56332 * b)
@@ -104,23 +149,49 @@ class DFRobot_TCS34(object):
         return cct
 
     def calculate_lux(self,r,g,b):
+        '''!
+          @fn calculateLux
+	        @brief Converts the raw R/G/B values to lux
+	        @param r  red.
+	        @param g  green.
+	        @param b  blue.
+	        @return  uint16_t lux.
+        '''
         illuminance = (-0.32466 * r) + (1.57837 * g) + (-0.73191 * b)
         return illuminance
     
     def lock(self):
+        '''!
+          @fn lock
+	        @brief Interrupts enabled
+        '''
         reg = self._read_reg(self.TCS34_ENABLE,1)
         data = reg[0]|self.TCS34_ENABLE_AIEN
         self._write_reg(self.TCS34_ENABLE,data)
     
     def unlock(self):
+        '''!
+          @fn unlock
+	        @brief Interrupts disabled
+        '''
         reg = self._read_reg(self.TCS34_ENABLE,1)
         data = reg[0]&(~self.TCS34_ENABLE_AIEN)
         self._write_reg(self.TCS34_ENABLE,data)
     
     def clear(self):
+        '''!
+          @fn clear
+	        @brief clear Interrupts
+        '''
         self.__i2cbus.write_byte_data(self.__i2c_addr,0xE6,0)
     
     def set_int_limits(self,low,high):
+        '''!
+          @fn set_int_limits
+	        @brief set Int Limits
+	        @param l low .
+	        @param h high .
+        '''
         data = low & 0xff
         self._write_reg(0x04,data)
         data = low >> 8
@@ -131,6 +202,10 @@ class DFRobot_TCS34(object):
         self._write_reg(0x07,data)
 
     def set_generateinterrupts(self):
+        '''!
+          @fn setGenerateinterrupts
+	        @brief Set the Generate interrupts object
+        '''
         data = self.TCS34_PERS_NONE
         self._write_reg(self.TCS34_PERS,data)
     

@@ -39,7 +39,7 @@ SKU：SEN0212
 
 	/**
 	 * @fn setIntegrationtime
-	 * @brief 设置TC34725的集成时间。
+	 * @brief 设置TC34725的积分时间。
 	 * @param it  积分时间
 	 */
 	void setIntegrationtime(eIntegrationTime_t it);

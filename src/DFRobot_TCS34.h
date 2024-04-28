@@ -94,7 +94,7 @@ public:
 	/**
 	 * @fn begin
 	 * @brief Initializes I2C and configures the sensor (call this function beforedoing anything else).
-	 @param sensor 选择传感器
+	 * @param sensor Select sensor
 	 * @return boolean
 	 * @retval true success
 	 * @retval false fail
@@ -168,7 +168,7 @@ public:
 	void enable(void);
 
 	/**
-	 * @fn enable
+	 * @fn disable
 	 * @brief disenables the device
 	 */
 	void disable(void);

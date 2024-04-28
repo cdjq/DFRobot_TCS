@@ -1,6 +1,6 @@
 /*!
  * @file  DFRobot_TCS34Publics.h
- * @brief 
+ * @brief General document
  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @license     The MIT License (MIT)
  * @author      TangJie(jie.tang@dfrobot.com)

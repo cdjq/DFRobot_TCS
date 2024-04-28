@@ -25,10 +25,10 @@ public:
   DFRobot_TCS34725(TwoWire *pWire=&Wire, uint8_t I2C_addr = TCS34725_ADDRESS, eIntegrationTime_t it= TCS34725_INTEGRATIONTIME_2_4MS, eGain_t gain= TCS34725_GAIN_1X);
   /**
    * @fn begin
-   * @brief 初始化传感器
-   * @return 返回初始化状态
-   * @retval  RET_OK 初始化成功
-   * @retval RET_ERROR 初始化失败
+   * @brief Initialize the sensor
+   * @return Initialization status
+   * @retval RET_OK Initialization successful
+   * @retval RET_ERROR Initialization failed
   */
   int8_t begin(void);
 

@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*
+'''!
+@file  DFRobot_TCS34Publics.py
+@brief General document
+@copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+@license     The MIT License (MIT)
+@author      TangJie(jie.tang@dfrobot.com)
+@version     V1.0.0
+@date        2024-04-24
+@url         https://github.com/DFRobot/DFRobot_TCS
+
+'''
 
 TCS34725          =      0 
 TCS3400           =      1
